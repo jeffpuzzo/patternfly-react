@@ -90,3 +90,31 @@ describe('test isInvalid', () => {
     expect(view.find('.pf-m-error')).toHaveLength(1);
   })
 })
+
+describe.only('test includeSeconds', () => {
+  const baseProps = {
+    "aria-label": "time picker",
+    value: "12:00:00 PM",
+    includeSeconds: true
+  };
+
+  it('should be valid still with a max value of "23:59:59" by default', () => {
+    const event: any = { currentTarget: { value: "23:59:59" } };
+    const view = mount(<TimePicker {...baseProps} value="20:00" is24Hour />);
+
+    act(() => view.find('input').prop('onChange')(event));
+    view.update();
+
+    expect(view.find('.pf-m-error')).toHaveLength(0);
+  });
+
+  it('should be invalid with a max value of "24:00:00" by default', () => {
+    const event: any = { currentTarget: { value: "24:00:00" } };
+    const view = mount(<TimePicker {...baseProps} value="20:00" is24Hour />);
+
+    act(() => view.find('input').prop('onChange')(event));
+    view.update();
+
+    expect(view.find('.pf-m-error')).toHaveLength(1);
+  });
+});
