@@ -35,26 +35,39 @@ const selectOptionsCustom = [
 
 describe('select', () => {
   describe('single select', () => {
+    // ///////////////////////
+    // What does this test mean? Nothing seems to be tested that anything is "closed".
     test('renders closed successfully', () => {
       const view = mount(
-        <Select toggleId="single-select-closed" variant={SelectVariant.single} onSelect={jest.fn()}
-                onToggle={jest.fn()}>
+        <Select
+          toggleId="single-select-closed"
+          variant={SelectVariant.single}
+          onSelect={jest.fn()}
+          onToggle={jest.fn()}
+        >
           {selectOptions}
         </Select>
       );
       expect(view).toMatchSnapshot();
     });
 
+    // How do we know the snapshot actually shows something that is disabled?
     test('renders disabled successfully', () => {
       const view = mount(
-        <Select toggleId="single-select-disabled" variant={SelectVariant.single}
-                onSelect={jest.fn()} onToggle={jest.fn()} isDisabled>
+        <Select
+          toggleId="single-select-disabled"
+          variant={SelectVariant.single}
+          onSelect={jest.fn()}
+          onToggle={jest.fn()}
+          isDisabled
+        >
           {selectOptions}
         </Select>
       );
       expect(view).toMatchSnapshot();
     });
 
+    // How do we know the snapshot doesn't show the select when it's not expanded? to claim success, verifying the DOM element is visible would be more concrete.
     test('renders expanded successfully', () => {
       const view = mount(
         <Select variant={SelectVariant.single} onSelect={jest.fn()} onToggle={jest.fn()} isOpen>
@@ -63,6 +76,8 @@ describe('select', () => {
       );
       expect(view).toMatchSnapshot();
     });
+    // //////////////////////
+
     test('renders expanded successfully with custom objects', () => {
       const view = mount(
         <Select variant={SelectVariant.single} onSelect={jest.fn()} onToggle={jest.fn()} isOpen>
@@ -75,8 +90,13 @@ describe('select', () => {
 
   test('renders up direction successfully', () => {
     const view = mount(
-      <Select toggleId="select-up" variant={SelectVariant.single} direction={SelectDirection.up}
-              onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="select-up"
+        variant={SelectVariant.single}
+        direction={SelectDirection.up}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -85,7 +105,7 @@ describe('select', () => {
 
   describe('custom select filter', () => {
     test('filters properly', () => {
-      const customFilter = (e: React.ChangeEvent<HTMLInputElement>, value: string) => {
+      const customFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
         let input: RegExp;
         try {
           input = new RegExp(e.target.value, 'i');
@@ -133,13 +153,24 @@ test('renders select with favorites successfully', () => {
     <SelectOption id="option-1" value="Mr" key="00" />,
     <SelectOption id="option-2" value="Mrs" key="01" />,
     <SelectOption id="option-2" value="Ms" key="02" />,
-    <SelectOption id="option-4"  value="Other" key="03" />
+    <SelectOption id="option-4" value="Other" key="03" />
   ];
   const view = mount(
-    <Select variant={SelectVariant.single} onSelect={jest.fn()} onToggle={jest.fn()} isOpen isGrouped onFavorite={jest.fn()}
-    favorites={["option-1"]}>
-      <SelectGroup key="group-1" label="group 1">{selectOptionsFavorites}</SelectGroup>
-      <SelectGroup key="group-2" label="group 2">{selectOptionsFavorites}</SelectGroup>
+    <Select
+      variant={SelectVariant.single}
+      onSelect={jest.fn()}
+      onToggle={jest.fn()}
+      isOpen
+      isGrouped
+      onFavorite={jest.fn()}
+      favorites={['option-1']}
+    >
+      <SelectGroup key="group-1" label="group 1">
+        {selectOptionsFavorites}
+      </SelectGroup>
+      <SelectGroup key="group-2" label="group 2">
+        {selectOptionsFavorites}
+      </SelectGroup>
     </Select>
   );
   expect(view).toMatchSnapshot();
@@ -148,7 +179,12 @@ test('renders select with favorites successfully', () => {
 describe('checkbox select', () => {
   test('renders closed successfully', () => {
     const view = mount(
-      <Select toggleId="checkbox-select-closed" variant={SelectVariant.checkbox} onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="checkbox-select-closed"
+        variant={SelectVariant.checkbox}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -157,7 +193,12 @@ describe('checkbox select', () => {
 
   test('renders checkbox select selections properly', () => {
     const view = mount(
-      <Select toggleId="checkbox-select-selections" variant={SelectVariant.checkbox} onToggle={jest.fn()} selections={[selectOptions[0]]}>
+      <Select
+        toggleId="checkbox-select-selections"
+        variant={SelectVariant.checkbox}
+        onToggle={jest.fn()}
+        selections={[selectOptions[0]]}
+      >
         {selectOptions}
       </Select>
     );
@@ -166,7 +207,13 @@ describe('checkbox select', () => {
 
   test('renders checkbox select selections properly when isCheckboxSelectionBadgeHidden is true', () => {
     const view = mount(
-      <Select toggleId="checkbox-select-hidden-badge" variant={SelectVariant.checkbox} onToggle={jest.fn()} isCheckboxSelectionBadgeHidden selections={[selectOptions[0]]}>
+      <Select
+        toggleId="checkbox-select-hidden-badge"
+        variant={SelectVariant.checkbox}
+        onToggle={jest.fn()}
+        isCheckboxSelectionBadgeHidden
+        selections={[selectOptions[0]]}
+      >
         {selectOptions}
       </Select>
     );
@@ -238,7 +285,12 @@ describe('checkbox select', () => {
 describe('typeahead select', () => {
   test('renders closed successfully', () => {
     const view = mount(
-      <Select toggleId="typeahead-select-closed" variant={SelectVariant.typeahead} onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="typeahead-select-closed"
+        variant={SelectVariant.typeahead}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -320,6 +372,8 @@ describe('typeahead select', () => {
     expect(view).toMatchSnapshot();
   });
 
+  // /////////////////////////
+  // How do you know the snapshot actually shows you that something was created?
   xtest('test creatable option', () => {
     const mockEvent = { target: { value: 'test' } } as React.ChangeEvent<HTMLInputElement>;
     const view = mount(
@@ -332,12 +386,18 @@ describe('typeahead select', () => {
     view.update();
     expect(view).toMatchSnapshot();
   });
+  // /////////////////////////
 });
 
 describe('typeahead multi select', () => {
   test('renders closed successfully', () => {
     const view = mount(
-      <Select toggleId="typeahead-multi-select-closed" variant={SelectVariant.typeaheadMulti} onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="typeahead-multi-select-closed"
+        variant={SelectVariant.typeaheadMulti}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -412,12 +472,17 @@ describe('API', () => {
   });
 });
 
-
 describe('toggle icon', () => {
   const ToggleIcon = <div>Icon</div>;
   test('select single', () => {
     const view = mount(
-      <Select toggleId="select-toggle-icon-single" toggleIcon={ToggleIcon} variant={SelectVariant.single} onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="select-toggle-icon-single"
+        toggleIcon={ToggleIcon}
+        variant={SelectVariant.single}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -426,7 +491,13 @@ describe('toggle icon', () => {
 
   test('select checkbox', () => {
     const view = mount(
-      <Select toggleId="checkbox-select-toggle-icon" toggleIcon={ToggleIcon} variant={SelectVariant.checkbox} onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="checkbox-select-toggle-icon"
+        toggleIcon={ToggleIcon}
+        variant={SelectVariant.checkbox}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -435,7 +506,13 @@ describe('toggle icon', () => {
 
   test('typeahead select', () => {
     const view = mount(
-      <Select toggleId="typeahead-select-toggle-icon" toggleIcon={ToggleIcon} variant={SelectVariant.typeahead} onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="typeahead-select-toggle-icon"
+        toggleIcon={ToggleIcon}
+        variant={SelectVariant.typeahead}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -444,7 +521,13 @@ describe('toggle icon', () => {
 
   test('typeahead multi select', () => {
     const view = mount(
-      <Select toggleId="multi-typeahead-select-toggle-icon" toggleIcon={ToggleIcon} variant={SelectVariant.typeaheadMulti} onSelect={jest.fn()} onToggle={jest.fn()}>
+      <Select
+        toggleId="multi-typeahead-select-toggle-icon"
+        toggleIcon={ToggleIcon}
+        variant={SelectVariant.typeaheadMulti}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+      >
         {selectOptions}
       </Select>
     );
@@ -465,11 +548,21 @@ describe('select with custom content', () => {
 
 describe('select with placeholder', () => {
   test('applies the placeholder class when not selected', () => {
-    const view = mount(<Select variant={SelectVariant.single} onSelect={jest.fn()} onToggle={jest.fn()} hasPlaceholderStyle />);
+    const view = mount(
+      <Select variant={SelectVariant.single} onSelect={jest.fn()} onToggle={jest.fn()} hasPlaceholderStyle />
+    );
     expect(view.find('button.pf-m-placeholder')).toMatchSnapshot();
   });
   test('does not apply the placeholder class when selected', () => {
-    const view = mount(<Select variant={SelectVariant.single} onSelect={jest.fn()} onToggle={jest.fn()} hasPlaceholderStyle selections={['selected option']} />);
+    const view = mount(
+      <Select
+        variant={SelectVariant.single}
+        onSelect={jest.fn()}
+        onToggle={jest.fn()}
+        hasPlaceholderStyle
+        selections={['selected option']}
+      />
+    );
     expect(view.find('button.pf-m-placeholder').length).toBeFalsy();
   });
 });
