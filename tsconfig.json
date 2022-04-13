@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "rootDir": "./",
     "assumeChangesOnlyAffectDirectDependencies": true,
     "jsx": "react",
-    "lib": [
-      "es2015",
-      "dom"
-    ],
+    "lib": ["es2015", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@testing/*": ["testing/*"]
+    },
     "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",
@@ -18,13 +20,7 @@
     "strict": true,
     "strictNullChecks": false,
     "isolatedModules": true,
-    "plugins": [
-      { "transform": "transformer-cjs-imports" }
-    ]
+    "plugins": [{ "transform": "transformer-cjs-imports" }]
   },
-  "exclude": [
-    "**/**.test.tsx",
-    "**/**.test.ts",
-    "**/examples/**"
-  ]
+  "exclude": ["packages/**/examples/**"]
 }

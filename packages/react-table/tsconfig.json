@@ -3,12 +3,10 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist/esm",
+    "composite": true,
     "tsBuildInfoFile": "dist/esm.tsbuildinfo"
   },
-  "include": [
-    "./src/*",
-    "./src/**/*"
-  ],
+  "include": ["./src"],
   "references": [
     {
       "path": "../react-core"

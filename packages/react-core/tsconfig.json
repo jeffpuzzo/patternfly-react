@@ -1,14 +1,10 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
     "outDir": "./dist/esm",
     "tsBuildInfoFile": "dist/esm.tsbuildinfo"
   },
-  "include": [
-    "./src/*",
-    "./src/**/*"
-  ],
+  "include": ["./src", "../../testing"],
   "references": [
     {
       "path": "../react-styles"

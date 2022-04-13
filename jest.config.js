@@ -12,11 +12,13 @@ module.exports = {
   transform: {
     '^.+\\.[jt]sx?$': 'babel-jest'
   },
+  setupFilesAfterEnv: ['<rootDir>/testing/setup.ts'],
   transformIgnorePatterns: ['node_modules/(?!@patternfly|@novnc|@popperjs|lodash|monaco-editor|react-monaco-editor)'],
   testPathIgnorePatterns: ['<rootDir>/packages/react-integration/'],
   coveragePathIgnorePatterns: ['/dist/'],
   moduleNameMapper: {
-    '\\.(css|less)$': '<rootDir>/packages/react-styles/__mocks__/styleMock.js'
+    '\\.(css|less)$': '<rootDir>/packages/react-styles/__mocks__/styleMock.js',
+    '^@testing/(.*)$': '<rootDir>/testing/$1'
   },
   testEnvironment: 'jsdom'
 };
