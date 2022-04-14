@@ -3,6 +3,6 @@ import { render } from '@testing-library/react';
 import { Brand } from '../Brand';
 
 test('simple brand', () => {
-  const view = render(<Brand alt="brand" />);
-  expect(view.container).toMatchSnapshot();
+  const { asFragment } = render(<Brand alt="brand" />);
+  expect(asFragment()).toMatchSnapshot();
 });

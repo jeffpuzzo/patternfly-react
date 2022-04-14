@@ -2,7 +2,6 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 import { Pagination, PaginationVariant } from '../index';
 
@@ -75,10 +74,7 @@ describe('Pagination', () => {
 
     test('custom pagination toggle', () => {
       const { asFragment } = render(
-        <Pagination
-          itemCount={40}
-          toggleTemplate={'${firstIndex} - ${lastIndex} - ${itemCount} - ${itemsTitle}'}
-        />
+        <Pagination itemCount={40} toggleTemplate={'${firstIndex} - ${lastIndex} - ${itemCount} - ${itemsTitle}'} />
       );
       expect(asFragment()).toMatchSnapshot();
     });

@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 import {
   Visibility,
@@ -18,6 +17,7 @@ import {
   wrappable,
   textCenter
 } from './';
+import { IVisibility } from './decorators/classNames';
 import { IExtra } from '../TableTypes';
 
 describe('Transformer functions', () => {
@@ -215,7 +215,7 @@ describe('Transformer functions', () => {
   describe('visibility classNames', () => {
     Object.keys(Visibility).forEach(className => {
       test(`${className} is defined`, () => {
-        expect(Visibility[className]).not.toBe(undefined);
+        expect(Visibility[className as keyof IVisibility]).not.toBe(undefined);
       });
     });
   });

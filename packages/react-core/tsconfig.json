@@ -1,14 +1,12 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "../../../",
     "outDir": "./dist/esm",
+    "resolveJsonModule": true,
     "tsBuildInfoFile": "dist/esm.tsbuildinfo"
   },
-  "include": [
-    "./src/*",
-    "./src/**/*"
-  ],
+  "include": ["./src/*", "./src/**/*"],
   "references": [
     {
       "path": "../react-styles"

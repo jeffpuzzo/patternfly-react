@@ -5,10 +5,7 @@
     "outDir": "./dist/esm",
     "tsBuildInfoFile": "dist/esm.tsbuildinfo"
   },
-  "include": [
-    "./src/*",
-    "./src/**/*"
-  ],
+  "include": ["./src/*", "./src/**/*"],
   "references": [
     {
       "path": "../react-core"
