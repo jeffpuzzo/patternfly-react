@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Wizard, WizardFooterProps, WizardStep, WizardNavProps } from '../';
+import * as WizardContext from '../WizardContext';
+import { WizardContextProps } from '../../../../../dist/esm/next/components/Wizard/WizardContext';
+
+const useWizardContextSpy = jest.spyOn(WizardContext, 'useWizardContext');
 
 test('renders step when child is of type WizardStep', () => {
   render(
@@ -278,7 +282,7 @@ test('calls onClose on cancel link click', async () => {
   expect(onClose).toHaveBeenCalled();
 });
 
-test('unmounts inactive steps by default', async () => {
+test('does not render inactive step content', async () => {
   const user = userEvent.setup();
 
   render(
@@ -296,4 +300,36 @@ test('unmounts inactive steps by default', async () => {
 
   expect(screen.queryByText('Step 1 content')).toBeNull();
   expect(screen.getByText('Step 2 content')).toBeVisible();
+});
+
+test('parent steps have collapsed sub-steps by default unless the step is active', async () => {
+  const user = userEvent.setup();
+
+  render(
+    <Wizard startIndex={2}>
+      <WizardStep id="step-1" name="Test step 1" />
+      <WizardStep id="step-2" name="Test step 2" steps={[<WizardStep id="sub-step-1" name="Test sub step 1" />]} />
+    </Wizard>
+  );
+
+  expect(screen.getByLabelText('Expand step icon')).toBeVisible();
+
+  await user.click(screen.getByRole('button', { name: 'Next' }));
+
+  expect(screen.getByLabelText('Collapse step icon')).toBeVisible();
+});
+
+test('parent step can be non-collapsible by setting isCollapsible to false', () => {
+  render(
+    <Wizard>
+      <WizardStep
+        id="step-1"
+        name="Test step 1"
+        isCollapsible={false}
+        steps={[<WizardStep id="sub-step-1" name="Sub step 1" />]}
+      />
+    </Wizard>
+  );
+
+  expect(screen.queryByLabelText('step icon', { exact: false })).toBeNull();
 });

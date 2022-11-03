@@ -76,7 +76,7 @@ export const WizardNavInternal = ({ nav, isStepVisitRequired, isNavExpanded }: W
                   key={subStep.id}
                   id={subStep.id}
                   content={subStep.name}
-                  isCurrent={activeStep?.id === subStep.id}
+                  isCurrent={hasActiveChild}
                   isDisabled={isSubStepDisabled}
                   isVisited={subStep.isVisited}
                   stepIndex={subStep.index}
@@ -97,7 +97,7 @@ export const WizardNavInternal = ({ nav, isStepVisitRequired, isNavExpanded }: W
                 key={step.id}
                 id={step.id}
                 content={step.name}
-                isExpandable={true}
+                isExpandable={step.isCollapsible ?? true}
                 isCurrent={hasActiveChild}
                 isDisabled={!hasEnabledChildren}
                 isVisited={step.isVisited}
