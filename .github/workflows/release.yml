@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       # Yes, we really want to checkout the PR
       - run: |
-          if [[ ! -z "${GH_PR_NUM}" ]]; then 
+          if [[ ! -z "${GH_PR_NUM}" ]]; then
             echo "Checking out PR"
             git fetch origin pull/$GH_PR_NUM/head:tmp
             git checkout tmp
@@ -26,9 +26,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -38,7 +38,12 @@ jobs:
         with:
           path: |
             packages/*/dist
+            packages/*/next
+            packages/*/deprecated
+            packages/*/components
             packages/react-styles/css
+            packages/react-core/layouts
+            packages/react-core/helpers
           key: ${{ runner.os }}-dist-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock', 'package.json', 'packages/*/*', '!packages/*/dist', '!packages/*/node_modules') }}
       - name: Build dist
         run: yarn build && yarn build:umd
@@ -52,7 +57,7 @@ jobs:
       - uses: actions/checkout@v2
       # Yes, we really want to checkout the PR
       - run: |
-          if [[ ! -z "${GH_PR_NUM}" ]]; then 
+          if [[ ! -z "${GH_PR_NUM}" ]]; then
             echo "Checking out PR"
             git fetch origin pull/$GH_PR_NUM/head:tmp
             git checkout tmp
@@ -65,9 +70,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -92,7 +97,7 @@ jobs:
       - uses: actions/checkout@v2
       # Yes, we really want to checkout the PR
       - run: |
-          if [[ ! -z "${GH_PR_NUM}" ]]; then 
+          if [[ ! -z "${GH_PR_NUM}" ]]; then
             echo "Checking out PR"
             git fetch origin pull/$GH_PR_NUM/head:tmp
             git checkout tmp
@@ -105,9 +110,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -117,7 +122,12 @@ jobs:
         with:
           path: |
             packages/*/dist
+            packages/*/next
+            packages/*/deprecated
+            packages/*/components
             packages/react-styles/css
+            packages/react-core/layouts
+            packages/react-core/helpers
           key: ${{ runner.os }}-dist-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock', 'package.json', 'packages/*/*', '!packages/*/dist', '!packages/*/node_modules') }}
       - name: Build dist
         run: yarn build && yarn build:umd
@@ -136,7 +146,7 @@ jobs:
       - uses: actions/checkout@v2
       # Yes, we really want to checkout the PR
       - run: |
-          if [[ ! -z "${GH_PR_NUM}" ]]; then 
+          if [[ ! -z "${GH_PR_NUM}" ]]; then
             echo "Checking out PR"
             git fetch origin pull/$GH_PR_NUM/head:tmp
             git checkout tmp
@@ -149,9 +159,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -161,7 +171,12 @@ jobs:
         with:
           path: |
             packages/*/dist
+            packages/*/next
+            packages/*/deprecated
+            packages/*/components
             packages/react-styles/css
+            packages/react-core/layouts
+            packages/react-core/helpers
           key: ${{ runner.os }}-dist-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock', 'package.json', 'packages/*/*', '!packages/*/dist', '!packages/*/node_modules') }}
       - name: Build dist
         run: yarn build && yarn build:umd
@@ -191,7 +206,7 @@ jobs:
       - uses: actions/checkout@v2
       # Yes, we really want to checkout the PR
       - run: |
-          if [[ ! -z "${GH_PR_NUM}" ]]; then 
+          if [[ ! -z "${GH_PR_NUM}" ]]; then
             echo "Checking out PR"
             git fetch origin pull/$GH_PR_NUM/head:tmp
             git checkout tmp
@@ -204,9 +219,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -216,7 +231,12 @@ jobs:
         with:
           path: |
             packages/*/dist
+            packages/*/next
+            packages/*/deprecated
+            packages/*/components
             packages/react-styles/css
+            packages/react-core/layouts
+            packages/react-core/helpers
           key: ${{ runner.os }}-dist-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock', 'package.json', 'packages/*/*', '!packages/*/dist', '!packages/*/node_modules') }}
       - name: Build dist
         run: yarn build && yarn build:umd
@@ -242,7 +262,7 @@ jobs:
       - uses: actions/checkout@v2
       # Yes, we really want to checkout the PR
       - run: |
-          if [[ ! -z "${GH_PR_NUM}" ]]; then 
+          if [[ ! -z "${GH_PR_NUM}" ]]; then
             echo "Checking out PR"
             git fetch origin pull/$GH_PR_NUM/head:tmp
             git checkout tmp
@@ -255,9 +275,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -267,7 +287,12 @@ jobs:
         with:
           path: |
             packages/*/dist
+            packages/*/next
+            packages/*/deprecated
+            packages/*/components
             packages/react-styles/css
+            packages/react-core/layouts
+            packages/react-core/helpers
           key: ${{ runner.os }}-dist-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock', 'package.json', 'packages/*/*', '!packages/*/dist', '!packages/*/node_modules') }}
       - name: Build dist
         run: yarn build && yarn build:umd
@@ -294,7 +319,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.GH_TOKEN_REDALLEN }} # needs to be an admin token to get around branch protection
-          fetch-depth: "0"
+          fetch-depth: '0'
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - uses: actions/setup-node@v1
         with:
@@ -304,9 +329,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -316,11 +341,15 @@ jobs:
         with:
           path: |
             packages/*/dist
+            packages/*/next
+            packages/*/deprecated
+            packages/*/components
             packages/react-styles/css
+            packages/react-core/layouts
+            packages/react-core/helpers
           key: ${{ runner.os }}-dist-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock', 'package.json', 'packages/*/*', '!packages/*/dist', '!packages/*/node_modules') }}
       - name: Build dist
         run: yarn build && yarn build:umd
         if: steps.dist.outputs.cache-hit != 'true'
       - name: Deploy to NPM and Github
         run: .github/release.sh
-
